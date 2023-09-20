@@ -1,1 +1,1 @@
-String WebUrl = "https://reqres.in/api/";
+String WebUrl = "https://reqres.in/api/users/";
