@@ -12,16 +12,15 @@ class userslistScreen extends StatefulWidget {
 
 class _userslistScreenState extends State<userslistScreen> {
 
-  @override
-  void initState() {
+  void getResponses(){
+
     UserService userService = new UserService();
 
     userService.usersFetch().then((value) {
 
       if(value.statusCode==200){
         var response = jsonDecode(value.body);
-
-        print(response);
+        // print(response);
         CustomStorage.id=response['data'][0]['id'];
         CustomStorage.email=response['data'][0]['email'];
         CustomStorage.first_name=response['data'][0]['first_name'];
@@ -29,11 +28,75 @@ class _userslistScreenState extends State<userslistScreen> {
         CustomStorage.avatar=response['data'][0]['avatar'];
 
         print(CustomStorage.id);
+        print(CustomStorage.email);
+        print(CustomStorage.first_name);
+        print(CustomStorage.last_name);
+        print(CustomStorage.avatar);
+
+
+
+
+
+
       }
 
 
 
     });
+  }
+
+
+  void getSpecificResponses(int index){
+
+    //index starts from 0 ends to 5
+
+    UserService userService = new UserService();
+
+    userService.usersFetch().then((value) {
+
+      if(value.statusCode==200){
+        var response = jsonDecode(value.body);
+        // print(response);
+
+        CustomStorage.id=response['data'][index]['id'];
+        CustomStorage.email=response['data'][index]['email'];
+        CustomStorage.first_name=response['data'][index]['first_name'];
+        CustomStorage.last_name=response['data'][index]['last_name'];
+        CustomStorage.avatar=response['data'][index]['avatar'];
+
+        print(CustomStorage.id);
+        print(CustomStorage.email);
+        print(CustomStorage.first_name);
+        print(CustomStorage.last_name);
+        print(CustomStorage.avatar);
+
+
+        // List list = [CustomStorage.id,CustomStorage.email,CustomStorage.first_name,CustomStorage.last_name,CustomStorage.avatar];
+        //
+        // for(int i=0;i<list.length;i++){
+        //   print(list[i]);
+        // }
+
+
+
+
+      }
+
+
+
+    });
+  }
+
+
+
+
+  @override
+  void initState() {
+    print("for default hard coated rsponse");
+    getResponses();
+print("for specific index response");
+    getSpecificResponses(2);
+
 
     super.initState();
   }
