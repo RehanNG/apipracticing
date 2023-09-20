@@ -4,4 +4,5 @@ class CustomStorage {
   static var first_name;
   static var last_name;
   static var avatar;
+  static var statusCode;
 }

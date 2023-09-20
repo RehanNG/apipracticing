@@ -12,6 +12,44 @@ class userslistScreen extends StatefulWidget {
 
 class _userslistScreenState extends State<userslistScreen> {
 
+  List<UserService> users = [];
+
+  void getUsersAsList(){
+
+    UserService userService = new UserService();
+
+    userService.usersFetch().then((value) {
+
+      if(value.statusCode==200){
+        var response = jsonDecode(value.body);
+        // print(response);
+        List<dynamic> userData = response['data'];
+
+        setState(() {
+
+         users = userData.map((e) => _mapUser()).toList();
+
+        });
+
+
+
+
+
+
+
+      }
+
+
+
+    });
+  }
+
+  UserService _mapUser(){
+    dynamic values = "${CustomStorage.id}${CustomStorage.email}${CustomStorage.first_name}${CustomStorage.last_name}${CustomStorage.avatar}";
+    return values;
+  }
+
+
   void getResponses(){
 
     UserService userService = new UserService();
@@ -97,17 +135,24 @@ class _userslistScreenState extends State<userslistScreen> {
 print("for specific index response");
     getSpecificResponses(2);
 
-
+    // getUsersAsList();
     super.initState();
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
 
 
 
