@@ -46,6 +46,7 @@ class _API_ResponseState extends State<API_Response> {
                   print(decode);
                   // kuchBheCont.text=decode['id'].toString();
 
+                  //here data in decoded response was one value
                   CustomStorage.avatar=decode['data']['avatar'];
                   CustomStorage.id=decode['data']['id'];
                   CustomStorage.firstName=decode['data']['first_name'];
