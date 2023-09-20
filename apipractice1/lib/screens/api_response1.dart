@@ -42,22 +42,19 @@ class _API_ResponseState extends State<API_Response> {
                 //this condition is necessary to get the response , if we will not do so big error will come directly
                 if(value.statusCode==200){
                   CustomStorage.statusCode=value.statusCode;
-                  var decode=  jsonDecode(value.body);
+                  var decode=jsonDecode(value.body);
                   print(decode);
                   // kuchBheCont.text=decode['id'].toString();
-                  CustomStorage.id=decode['data']['id'];
-                  print("id is: ${CustomStorage.id}");
-                  CustomStorage.avatar=decode['data']['avatar'];
-                 setState(() {});   // Trigger a rebuild to update the UI
 
-                  // CustomStorage.email=decode['data'][0]['email'];
-                  // print("email is: ${CustomStorage.email}");
-                  // CustomStorage.avatar=decode['data'][0]['avatar'];
-                  // print("avatar link: ${decode['data'][0]['avatar']}");
-                  // CustomStorage.email=decode['data'];
-                  // CustomStorage.firstName=decode['first_name'];
-                  // CustomStorage.lastName=decode['last_name'];
-                  // CustomStorage.avatar=decode['avatar'];
+                  CustomStorage.avatar=decode['data']['avatar'];
+                  CustomStorage.id=decode['data']['id'];
+                  CustomStorage.firstName=decode['data']['first_name'];
+                  CustomStorage.lastName=decode['data']['last_name'];
+                  CustomStorage.email=decode['data']['email'];
+
+                  CustomStorage.supporturl=decode['support']['url'];
+                  CustomStorage.supporttext=decode['support']['text'];
+                 setState(() {});   // Trigger a rebuild to update the UI
                 }
 
 
@@ -69,7 +66,13 @@ class _API_ResponseState extends State<API_Response> {
             // Text("${kuchBheCont.text=CustomStorage.avatar}"),
 
 
-            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     ClipRRect( borderRadius:BorderRadius.circular(50), child: Image(image: NetworkImage("${ CustomStorage.avatar}") )),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     ClipRRect( borderRadius:BorderRadius.circular(360), child: Image(image: NetworkImage("${ CustomStorage.avatar}") )),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     Center(child: Text(" Id : ${CustomStorage.id}")),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     Center(child: Text(" First Name :  ${CustomStorage.firstName}")),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     Center(child: Text(" Last Name  :${CustomStorage.lastName}")),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     Center(child: Text(" Email : ${CustomStorage.email}")),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     SingleChildScrollView(scrollDirection: Axis.vertical, child: SizedBox(width: 180,height: 60, child: Center(child: Text(" Support url: \n ${CustomStorage.supporturl}")))),
+            CustomStorage.statusCode!=200 ? Text("waiting for response")   :     SingleChildScrollView(scrollDirection: Axis.vertical,child: SizedBox( width: 180, height: 80, child: Center(child: Text(" Support text : \n ${CustomStorage.supporttext}")))),
 
           ],
         ),

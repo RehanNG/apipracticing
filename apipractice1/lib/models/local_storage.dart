@@ -9,5 +9,7 @@ class CustomStorage{
   static var firstName;
   static var lastName;
   static var avatar;
+  static var supporturl;
+  static var supporttext;
   static var statusCode;
 }
