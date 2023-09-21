@@ -5,18 +5,13 @@ import 'package:apipracticetwo/services/user_service.dart';
 import 'package:flutter/material.dart';
 class userslistScreen extends StatefulWidget {
   const userslistScreen({Key? key}) : super(key: key);
-
   @override
   State<userslistScreen> createState() => _userslistScreenState();
 }
-
 class _userslistScreenState extends State<userslistScreen> {
   void getResponses(){
-
     UserService userService = new UserService();
-
     userService.usersFetch().then((value) {
-
       if(value.statusCode==200){
         var response = jsonDecode(value.body);
         // print(response);
@@ -25,16 +20,11 @@ class _userslistScreenState extends State<userslistScreen> {
         CustomStorage.first_name=response['data'][0]['first_name'];
         CustomStorage.last_name=response['data'][0]['last_name'];
         CustomStorage.avatar=response['data'][0]['avatar'];
-
         print(CustomStorage.id);
         print(CustomStorage.email);
         print(CustomStorage.first_name);
         print(CustomStorage.last_name);
         print(CustomStorage.avatar);
-
-
-
-
 
 
       }
@@ -60,19 +50,12 @@ class _userslistScreenState extends State<userslistScreen> {
         CustomStorage.first_name=response['data'][index]['first_name'];
         CustomStorage.last_name=response['data'][index]['last_name'];
         CustomStorage.avatar=response['data'][index]['avatar'];
-
         // print(CustomStorage.id);
         // print(CustomStorage.email);
         // print(CustomStorage.first_name);
         // print(CustomStorage.last_name);
         // print(CustomStorage.avatar);
 
-
-        // List list = [CustomStorage.id,CustomStorage.email,CustomStorage.first_name,CustomStorage.last_name,CustomStorage.avatar];
-        //
-        // for(int i=0;i<list.length;i++){
-        //   print(list[i]);
-        // }
 
 
 
@@ -83,51 +66,11 @@ class _userslistScreenState extends State<userslistScreen> {
 
     });
   }
-//
-//   void getUsersList(){
-//
-//     //index starts from 0 ends to 5
-//
-//     UserService userService = new UserService();
-//
-//     userService.usersFetch().then((value){
-//
-//       if(value.statusCode==200){
-//
-//         List<UserService> userList = [];
-//         var response = jsonDecode(value.body);
-//         print(response);
-//         var userData = response['data'];
-//         for (var data in userData) {
-//           UserService user =UserService(
-//             id: data['id'],
-//             email: data['email'],
-//             first_name: data['first_name'],
-//             last_name: data['last_name'],
-//             avatar: data['avatar'],
-//           );
-//
-//           userList.add(user);
-//           CustomStorage.usersListLength = userList.length;
-//           CustomStorage.usersList = userList;
-//           CustomStorage.userdata = userData;
-//           print("custom storage main response  ${CustomStorage.userdata = userData}");
-//         }
-// setState(() {
-//
-// });
-//       }
-//
-//
-//
-//
-//     });
-//
-//
-//   }
+
 
   @override
   void initState() {
+//    Just Uncomment this and view these responses in debuging mode
 //     print("for default hard coated rsponse");
 //     getResponses();
 // print("for specific index response");
