@@ -154,6 +154,9 @@ class _userslistScreenState extends State<userslistScreen> {
           itemBuilder: (context, index) {
             UserService user = userList[index];
             return ListTile(
+              leading:  CircleAvatar(
+                backgroundImage: NetworkImage(user.avatar),
+              ),
               title: Text(user.first_name+''+user.last_name),
               subtitle: Text(user.email),
             );
