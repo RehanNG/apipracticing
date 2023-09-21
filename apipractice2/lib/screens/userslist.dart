@@ -11,10 +11,6 @@ class userslistScreen extends StatefulWidget {
 }
 
 class _userslistScreenState extends State<userslistScreen> {
-
-
-
-
   void getResponses(){
 
     UserService userService = new UserService();
@@ -47,8 +43,6 @@ class _userslistScreenState extends State<userslistScreen> {
 
     });
   }
-
-
   void getSpecificResponses(int index){
 
     //index starts from 0 ends to 5
@@ -89,45 +83,48 @@ class _userslistScreenState extends State<userslistScreen> {
 
     });
   }
-
-
-  void getUsersList(){
-
-    //index starts from 0 ends to 5
-
-    UserService userService = new UserService();
-
-    userService.usersFetch().then((value){
-
-      if(value.statusCode==200){
-        List<UserService> userList = [];
-        var response = jsonDecode(value.body);
-        // print(response);
-        var userData = response['data'];
-        for (var data in userData) {
-          UserService user =UserService(
-            id: data['id'],
-            email: data['email'],
-            first_name: data['first_name'],
-            last_name: data['last_name'],
-            avatar: data['avatar'],
-          );
-
-          userList.add(user);
-        }
-
-
-
-
-
-
-      }
-
-
-
-    });
-  }
-
+//
+//   void getUsersList(){
+//
+//     //index starts from 0 ends to 5
+//
+//     UserService userService = new UserService();
+//
+//     userService.usersFetch().then((value){
+//
+//       if(value.statusCode==200){
+//
+//         List<UserService> userList = [];
+//         var response = jsonDecode(value.body);
+//         print(response);
+//         var userData = response['data'];
+//         for (var data in userData) {
+//           UserService user =UserService(
+//             id: data['id'],
+//             email: data['email'],
+//             first_name: data['first_name'],
+//             last_name: data['last_name'],
+//             avatar: data['avatar'],
+//           );
+//
+//           userList.add(user);
+//           CustomStorage.usersListLength = userList.length;
+//           CustomStorage.usersList = userList;
+//           CustomStorage.userdata = userData;
+//           print("custom storage main response  ${CustomStorage.userdata = userData}");
+//         }
+// setState(() {
+//
+// });
+//       }
+//
+//
+//
+//
+//     });
+//
+//
+//   }
 
   @override
   void initState() {
@@ -136,32 +133,31 @@ class _userslistScreenState extends State<userslistScreen> {
 // print("for specific index response");
 //     getSpecificResponses(2);
 
-    print("geting users list");
-    getUsersList();
-    // getUsersAsList();
+    getAllUsersListData();
     super.initState();
   }
 
-
-
+  List<UserService> userList = [];
+  Future<void> getAllUsersListData() async {
+    UserService userService = UserService();
+    List<UserService> users = await userService.getUsersListData();
+    setState(() {
+      userList = users;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-
-
-
-
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: userList.length,
+          itemBuilder: (context, index) {
+            UserService user = userList[index];
+            return ListTile(
+              title: Text(user.first_name+''+user.last_name),
+              subtitle: Text(user.email),
+            );
+          }),
     );
   }
 }
