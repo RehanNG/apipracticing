@@ -32,17 +32,7 @@ class UserService{
     last_name = json['last_name'];
     avatar = json['avatar'];
   }
-
-  // Future<List<UserService>> getUsersListData() async{
-  //   var url = Uri.parse(api);
-  //   final response = await http.get(url
-  //       ,headers: {'Content-Type': 'application/json; charset=utf-8',}
-  //   );
-  //   final List body = json.decode(response.body);
-  //   return body.map((e) => UserService.fromJson(e)).toList();
-  // }
-
-
+  
   Future<List<UserService>> getUsersListData() async {
     var url = Uri.parse(api);
     final response = await http.get(
